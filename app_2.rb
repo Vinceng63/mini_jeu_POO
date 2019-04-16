@@ -11,25 +11,56 @@ puts "|Le but du jeu est d'être le dernier survivant !|"
 puts "-------------------------------------------------"
 
 # initialisation du joueur
-puts "Quel est ton prénom ?"
-HumanPlayerBis = gets.chomp
-puts "#{HumanPlayerBis}"
+puts "Quel est le nom de ton joueur ?"
+player3 = HumanPlayer.new(gets.chomp.to_s)
+puts ""
 
 # înitialisation des ennemis
-enemies = []
 player1 = Player.new("Josiane")
 player2 = Player.new("José")
-user = HumanPlayerBis
+bad_guys = [player1, player2] 
+user = player3
 
 # le combat
-while user.life_points >0 && (player1.life_points > 0 || player2.life_points >0)
-    
+while user.life_points > 0 && (player1.life_points > 0 || player2.life_points > 0)
+    puts "Voici l'état de santé de ton joueur #{user.name} :"
+    puts "#{user.show_state}"
+    puts ""
+    puts "Que veux-tu faire ?"
+    puts "a - chercher une meilleure arme"
+    puts "s - chercher à se soigner"
+    puts "Attaquer un autre joueur :"
+    puts "0 - #{player1.name}, qui possède #{player1.show_state} points de vie"
+    puts "1 - #{player2.name}, qui possède #{player2.show_state} points de vie"
+    puts ""
+    user_choice = gets.chomp
+    if user_choice == "a"
+        user.search_weapon
+    elsif user_choice == "s"
+        user.search_health_pack
+    elsif user_choice == "0"
+        user.attacks(player1)
+    elsif user_choice == "1"
+        user.attacks(player2)
+    else
+        puts "Choix non valide !"
+    end
+    puts ""
+    puts "Les autres joueurs t'attaquent !"
+    bad_guys.each do |bad_guy|
+        if bad_guy.life_points <= 0
+            break
+        else 
+            bad_guy.attacks(user)
+        end
+    end
 end
 # partie finie
 
 #message de fin
-if HumanPlayerBis.life_points > 0
-    puts "La partie est finie"
-    puts "BRAVO ! TU AS GAGNE !"
+if player3.life_points > 0
+	puts "La partie est finie"
+	puts "BRAVO ! TU AS GAGNE !"
 else
-    puts "Loser ! Tu as perdu !"
+	puts "Loser ! Tu as perdu !"
+end
