@@ -31,3 +31,14 @@ class Player #définition de la méthode classe avec attribut read et write
   end
 
 end
+
+
+class HumanPlayer < Player
+  attr_accessor :weapon_level
+
+  def initialize(name)
+    super(name)
+    @life_points = 100
+    @weapon_level = 1
+  end
+end
