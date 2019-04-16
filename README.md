@@ -12,6 +12,11 @@ Fichier player.rb
 
 
 
+Version 2.0 : créer un nouveau type de joueur
+
+Fichier app_2.rb
+Fichier player.rb
+
 
 
 
