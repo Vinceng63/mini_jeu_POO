@@ -4,6 +4,8 @@
 Vincent GUEGAN & Lucas PIQUET
 
 
+Les 2 premiers exercices fonctionnent correctement !
+
 
 Exercice version 1.0 : coder un combat entre 2 joueurs
 
