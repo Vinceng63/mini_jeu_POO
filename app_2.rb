@@ -18,7 +18,7 @@ puts ""
 # înitialisation des ennemis
 player1 = Player.new("Josiane")
 player2 = Player.new("José")
-bad_guys = [player1, player2] 
+enemies = [player1, player2] 
 user = player3
 
 # le combat
@@ -30,8 +30,8 @@ while user.life_points > 0 && (player1.life_points > 0 || player2.life_points > 
     puts "a - chercher une meilleure arme"
     puts "s - chercher à se soigner"
     puts "Attaquer un autre joueur :"
-    puts "0 - #{player1.name}, qui possède #{player1.show_state} points de vie"
-    puts "1 - #{player2.name}, qui possède #{player2.show_state} points de vie"
+    puts "0 - #{player1.name} -> #{player1.show_state} points de vie"
+    puts "1 - #{player2.name} -> #{player2.show_state} points de vie"
     puts ""
     user_choice = gets.chomp
     if user_choice == "a"
@@ -46,13 +46,12 @@ while user.life_points > 0 && (player1.life_points > 0 || player2.life_points > 
         puts "Choix non valide !"
     end
     puts ""
-    puts "Les autres joueurs t'attaquent !"
-    bad_guys.each do |bad_guy|
-        if bad_guy.life_points <= 0
-            break
-        else 
-            bad_guy.attacks(user)
-        end
+    # .all? vérifie si la condition est vraie pour TOUS les éléments de l'array
+    # si oui, cela nous sort de la boucle
+    break if enemies.all? { |enemie| enemie.life_points <= 0 }
+	puts "Les autres joueurs attaquent !"
+    enemies.each do |enemie|
+    	enemie.attacks(user) if user.life_points > 0 && enemie.life_points > 0 
     end
 end
 # partie finie
